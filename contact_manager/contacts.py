@@ -1,5 +1,6 @@
 import os
 import json
+import csv
 import re
 class ContactManager:
     def __init__(self, file_path = "contact_manager/data/contacts.json"):
@@ -55,3 +56,15 @@ class ContactManager:
             print(f"Contact {name} was deleted.")
         else:
             print(f"Contact {name} not found.")
+
+    def export_to_csv(self, contacts, file_path = "contact_manager/data/contacts_export.csv"):
+        """Exports all contacts to CSV file."""
+        try:
+            with open(file_path, mode= "w", newline= "") as file:
+                writer = csv.writer(file)
+                writer.writerow(["name", "number"]) #Header
+                for name, number in contacts.items():
+                    writer.writerow([name, number])
+                print(f"Contacts where successfully exported to {file_path}.")
+        except Exception as e:
+            print(f"Export to CSV was unsuccessfull : {e}")

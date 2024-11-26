@@ -10,7 +10,7 @@ def main():
         print("2.---Show all contacts---")
         print("3.---Search contact---")
         print("4.---Delete contact---")
-        # print("5.---Export all contacts to CSV---")
+        print("5.---Export all contacts to CSV---")
         print("---For exit type 'EXIT'---\n")
 
         choice = input("What you want to do. Choose 1, 2, 3, 4 or 5: ")
@@ -32,9 +32,8 @@ def main():
             manager.delete_contact(name)
 
 
-        # elif choice == "5":
-        #     name = input("Enter name of contact you want to delete: ")
-        #     manager.delete_contact(name)
+        elif choice == "5":
+            manager.export_to_csv(manager.contacts)
 
         elif choice.lower() == "exit":
             print("Program terminated.")
