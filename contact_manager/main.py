@@ -1,4 +1,4 @@
-from contacts import Contact, ContactManager
+from contacts import ContactManager
 
 
 def main():
@@ -9,32 +9,38 @@ def main():
         print("1.---Add new contact---")
         print("2.---Show all contacts---")
         print("3.---Search contact---")
-        print("4.---End of program---\n")
+        print("4.---Delete contact---")
+        # print("5.---Export all contacts to CSV---")
+        print("---For exit type 'EXIT'---\n")
 
-        choice = input("What you want to do. Choose 1, 2, 3 or 4: ")
+        choice = input("What you want to do. Choose 1, 2, 3, 4 or 5: ")
         
         if choice == "1":
-            name = input("Enter name of contact: ")
-            while name == "":
-                name = input("Enter name of contact: ")
-            number = input("Enter phone number: ")
-            while number == "":
-                number = input("Enter name of contact: ")
-            new_contact = Contact(name, number)
-            manager.add_new_contact(new_contact)
+            name = input("Enter name of contact: ").title()
+            number = input("Enter name of contact: ")
+            manager.add_new_contact(name, number)
             
-
         elif choice == "2":
             manager.show_all_contacts()
+
         elif choice == "3":
-            name = input("Enter name of contact you want find: ")
-            result = manager.search_contact(name)
-            print(result)
+            name = input("Enter name of contact you want find: ").title()
+            print(manager.search_contact(name))
+
         elif choice == "4":
+            name = input("Enter name of contact you want to delete: ").title()
+            manager.delete_contact(name)
+
+
+        # elif choice == "5":
+        #     name = input("Enter name of contact you want to delete: ")
+        #     manager.delete_contact(name)
+
+        elif choice.lower() == "exit":
             print("Program terminated.")
             break
         else:
-            print("\nInvalid input. Try again with choice 1, 2, 3 or 4")
+            print("\nInvalid input. Try again with choice 1 to 5 or 'exit'")
         
 
 if __name__ == "__main__":
