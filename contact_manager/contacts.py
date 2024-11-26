@@ -23,8 +23,15 @@ class ContactManager:
             json.dump(self.contacts, file, indent=4)
 
 
+    def is_valid_number(self, number):
+        return re.fullmatch(r'\+?\d{9,15}', number) is not None
+
     def add_new_contact(self, name, number):
         """Adds ne contact to file"""
+        if not self.is_valid_number(number):
+            print("Invalid phone number. It must be 9-15 digits and may start with +.")
+            return
+        
         if name in self.contacts:
             print(f"Contact with name {name} exists!")
         else:
