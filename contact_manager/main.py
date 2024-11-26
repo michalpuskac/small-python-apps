@@ -16,19 +16,19 @@ def main():
         choice = input("What you want to do. Choose 1, 2, 3, 4 or 5: ")
         
         if choice == "1":
-            name = input("Enter name of contact: ").title()
-            number = input("Enter name of contact: ")
+            name = input("Enter name of contact: ").strip()
+            number = input("Enter name of contact: ").strip()
             manager.add_new_contact(name, number)
             
         elif choice == "2":
             manager.show_all_contacts()
 
         elif choice == "3":
-            name = input("Enter name of contact you want find: ").title()
+            name = input("Enter name of contact you want find: ").strip()
             print(manager.search_contact(name))
 
         elif choice == "4":
-            name = input("Enter name of contact you want to delete: ").title()
+            name = input("Enter name of contact you want to delete: ").strip()
             manager.delete_contact(name)
 
 

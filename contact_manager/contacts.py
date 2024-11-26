@@ -32,10 +32,10 @@ class ContactManager:
             print("Invalid phone number. It must be 9-15 digits and may start with +.")
             return
         
-        if name in self.contacts:
+        if name.lower() in self.contacts:
             print(f"Contact with name {name} exists!")
         else:
-            self.contacts[name] = number
+            self.contacts[name.lower()] = number
             self._save_contacts() #automatic save
             print(f"Contact {name} added.")
 
@@ -52,13 +52,13 @@ class ContactManager:
 
     def search_contact(self, name):
         """Search contact by name"""
-        return self.contacts.get(name, "Contact not Found")
+        return self.contacts.get(name.lower(), "Contact not Found")
 
 
     def delete_contact(self,name):
         """Delete contact by name."""
-        if name in self.contacts:
-            del self.contacts[name]
+        if name.lower() in self.contacts:
+            del self.contacts[name.lower()]
             self._save_contacts() #Auto save after deleting contact
             print(f"Contact {name} was deleted.")
         else:
