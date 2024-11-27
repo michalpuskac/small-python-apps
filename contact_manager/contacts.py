@@ -108,12 +108,13 @@ class ContactManager:
 
     def export_to_csv(self, contacts, file_path = None):
         """Exports all contacts to CSV file."""
-        if file_path is None:
-            file_path = self.file_path.with_suffix(".csv")
+        file_path = file_path or self.file_path.with_suffix(".csv")
         try:
-            with open(file_path, mode= "w", newline= "") as file:
+            file_path.parent.mkdir(parents=True, exist_ok=True)
+
+            with open(file_path, "w", newline= "") as file:
                 writer = csv.writer(file)
-                writer.writerow(["name", "number"]) #Header
+                writer.writerow(["Name", "Phone number"]) #Header
                 for name, number in self.contacts.items():
                     writer.writerow([name.title(), number])
                 print(f"Contacts successfully exported to {file_path}.")
