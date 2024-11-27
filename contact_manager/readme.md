@@ -64,7 +64,7 @@ Install the required Python packages from the requirements.txt file:
 
 Run the main script to interact with the Contact Manager:
 
-python main.py
+        python main.py
 
 ### Example Interaction
 
@@ -80,7 +80,7 @@ python main.py
 
 The application includes comprehensive tests using pytest. To run the tests:
 
-pytest test_contact_manager.py
+        pytest test_contact_manager.py
 
 This will validate the functionality of all core features, ensuring the application works as expected.
 
