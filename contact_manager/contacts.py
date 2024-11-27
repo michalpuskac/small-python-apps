@@ -2,16 +2,25 @@ import os
 import json
 import csv
 import re
+from pathlib import Path
 class ContactManager:
-    def __init__(self, file_path = "contact_manager/data/contacts.json"):
-        self.file_path = file_path
+    def __init__(self, file_path = None):
+        """Define defaul path: a hidden folder  in the user's home directory"""
+        default_dir = Path.home() / "ContactManager"
+        default_path = default_dir / "contacts.json"
+
+        self.file_path = Path(file_path) if file_path else default_path
+        #Ensure defaul directory exists if using the default path
+        if not file_path:
+            default_dir.mkdir(parents=True, exist_ok= True)
+        
         self.contacts = self._load_contacts()
 
 
     def _load_contacts(self):
         """Read contacts from JSON file into dictionary with error hangdling."""
         try:
-            if os.path.exists(self.file_path):
+            if self.file_path.exists():
                 with open(self.file_path, "r") as file:
                     return json.load(file)
             else:
@@ -33,7 +42,6 @@ class ContactManager:
     def _save_contacts(self):
         """Save contacts to JSON file."""
         try:
-            os.makedirs(os.path.dirname(self.file_path), exist_ok= True)
             with open(self.file_path, "w") as file:
                 json.dump(self.contacts, file, indent=4)
 
@@ -46,8 +54,9 @@ class ContactManager:
     def is_valid_number(self, number):
         return re.fullmatch(r'\+?\d{9,15}', number) is not None
 
+
     def add_new_contact(self, name, number):
-        """Adds ne contact to file"""
+        """Adds new contact to file"""
         if not self.is_valid_number(number):
             print("Invalid phone number. It must be 9-15 digits and may start with +.\n")
             return
@@ -83,14 +92,17 @@ class ContactManager:
         else:
             print(f"Contact {name} not found.\n")
 
-    def export_to_csv(self, contacts, file_path = "contact_manager/data/contacts_export.csv"):
+
+    def export_to_csv(self, contacts, file_path = None):
         """Exports all contacts to CSV file."""
+        if file_path is None:
+            file_path = self.file_path.with_suffix(".csv")
         try:
             with open(file_path, mode= "w", newline= "") as file:
                 writer = csv.writer(file)
                 writer.writerow(["name", "number"]) #Header
-                for name, number in contacts.items():
-                    writer.writerow([name, number])
-                print(f"Contacts where successfully exported to {file_path}.")
+                for name, number in self.contacts.items():
+                    writer.writerow([name.title(), number])
+                print(f"Contacts successfully exported to {file_path}.")
         except Exception as e:
             print(f"Export to CSV was unsuccessfull : {e}\n")
