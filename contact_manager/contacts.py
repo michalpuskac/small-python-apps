@@ -3,6 +3,8 @@ import json
 import csv
 import re
 from pathlib import Path
+from tabulate import tabulate
+from shutil import copy2
 class ContactManager:
     def __init__(self, file_path = None):
         """Define defaul path: a hidden folder  in the user's home directory"""
@@ -42,6 +44,11 @@ class ContactManager:
     def _save_contacts(self):
         """Save contacts to JSON file."""
         try:
+            if self.file_path.exists():
+                backup_path = self.file_path.with_suffix(".bak")
+                copy2(self.file_path, backup_path)
+                print(f"Backup created: {backup_path}")
+                
             with open(self.file_path, "w") as file:
                 json.dump(self.contacts, file, indent=4)
 
@@ -73,14 +80,20 @@ class ContactManager:
         if not self.contacts:
             print("Contact list is empty.")
         else:
-            print("\n--Contact list--")
-            for name, number in self.contacts.items():
-                print(f"Name: {name}, Phone number: {number}")
+            print(tabulate(self.contacts.items(), headers = ["Name", "Phone number"], tablefmt ="grid"))
+            # print("\n--Contact list--")
+            # for name, number in self.contacts.items():
+                # print(f"Name: {name}, Phone number: {number}")
 
 
     def search_contact(self, name):
         """Search contact by name"""
-        return self.contacts.get(name.lower(), "Contact not Found\n")
+        result = self.contacts.get(name.lower())
+        if result:
+            table = [["Name", "Phone number"], [name.title(), result]]
+            return tabulate(table, headers="firstrow", tablefmt="grid")
+        else:
+            return "Contact not Found\n"
 
 
     def delete_contact(self,name):
