@@ -1,9 +1,8 @@
 import pytest
 import os
 import json
-from contacts import ContactManager  # Adjust import based on your project structure
+from contacts import ContactManager 
 
-# Use a pytest fixture to provide a clean ContactManager instance for each test
 @pytest.fixture
 def manager(tmp_path):
     """Fixture to create a ContactManager with a temporary test file."""
