@@ -33,29 +33,33 @@ Tkinter is often included with Python, but if it’s missing:
 
 - **Linux**: Install Tkinter via your package manager:
 
-    sudo apt-get install python3-tk
+        sudo apt-get install python3-tk
   
 3. Create a Virtual Environment
 
 It’s recommended to use a virtual environment to manage dependencies:
 
 1. Create the virtual environment:
-    python -m venv venv
+   
+        python -m venv venv
 or
-    python3 -m venv venv
+        python3 -m venv venv
 
-2. Activate the virtual environment:
+3. Activate the virtual environment:
 
 - Windows:
-    .\venv\Scripts\activate
+
+        .\venv\Scripts\activate
 
 - macOS/Linux:
-    source venv/bin/activate
+  
+        source venv/bin/activate
 
 4. Install Dependencies
 
 With the virtual environment activated, install the required packages:
-    pip install -r requirements.txt
+
+        pip install -r requirements.txt
 
 
 ## Usage
@@ -68,11 +72,12 @@ Option 1: Using the macOS .dmg File
 
 Option 2: Running the Python Script (termial and windows)
 
-0. Clone repository from github or downlod .zip file
-1. Navigate to the directory containing the app.py file.
-2. Ensure the virtual environment is activated.
+1. Clone repository from github or downlod .zip file
+2. Navigate to the directory containing the app.py file.
+2. Ensure the virtual environment is activated and requirements installed.
 3. Run the script:
-  python app.py
+
+        python app.py
 
 ## License
 
