@@ -20,11 +20,11 @@ A Python-based currency conversion application using Flask and a custom currency
 
 - On Windows:
 
-	.\venv\Scripts\activate
+		.\venv\Scripts\activate
 
 - On macOS/Linux:
 
-	source venv/bin/activate
+		source venv/bin/activate
 
 **3. Install dependencies:**
 
@@ -47,14 +47,14 @@ A Python-based currency conversion application using Flask and a custom currency
 
 - With a virtual environment:
 
-	python app.py
+		python app.py
 
 
 - With Poetry:
 
-	poetry run python app.py
+		poetry run python app.py
 
-**2. Open your browser and navigate to ** http://127.0.0.1:5000
+**2. Open your browser and navigate to** http://127.0.0.1:5000
 
         
 ## License
